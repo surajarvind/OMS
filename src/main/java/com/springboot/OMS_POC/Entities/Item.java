@@ -18,7 +18,7 @@ public class Item
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int itemId;
     @ManyToOne
-    @JoinColumn(name ="orderId",table = "Order")
+    @JoinColumn(name ="orderId")
     Order order;
     Double price;
     String fc;

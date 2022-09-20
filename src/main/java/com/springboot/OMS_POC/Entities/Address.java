@@ -25,6 +25,6 @@ public class Address
      int pinCode;
 
     @ManyToOne
-    CustomersDto customersDetailsAddress;
+    Customers customersDetailsAddress;
 
 }
