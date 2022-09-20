@@ -22,7 +22,7 @@ public class Address
      String street;
      String state;
      String country;
-     int pinCode;
+     String pinCode;
 
     @ManyToOne
     Customers customersDetailsAddress;

@@ -6,9 +6,12 @@ import com.springboot.OMS_POC.Repositories.ItemRepo;
 import com.springboot.OMS_POC.Services.ItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ItemServiceImpl implements ItemService
 {
+    @Autowired
     private ItemRepo itemRepo;
     @Autowired
     private ModelMapper modelMapper;

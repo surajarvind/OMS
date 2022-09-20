@@ -14,5 +14,5 @@ public class AddressDto
      String street;
      String state;
      String country;
-     int pinCode;
+     String pinCode;
 }
