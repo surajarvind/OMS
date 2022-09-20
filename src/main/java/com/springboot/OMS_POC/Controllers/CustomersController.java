@@ -1,8 +1,6 @@
 package com.springboot.OMS_POC.Controllers;
 
-import com.springboot.OMS_POC.Payloads.AddressDto;
 import com.springboot.OMS_POC.Payloads.CustomersDto;
-import com.springboot.OMS_POC.Services.AddressService;
 import com.springboot.OMS_POC.Services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
