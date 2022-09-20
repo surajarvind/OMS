@@ -1,7 +1,8 @@
 package com.springboot.OMS_POC.Controllers;
 
-import com.springboot.OMS_POC.Payloads.OrderDto;
-import com.springboot.OMS_POC.Services.OrderService;
+
+import com.springboot.OMS_POC.Payloads.ItemDto;
+import com.springboot.OMS_POC.Services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,15 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-public class OrderController
+public class ItemController
 {
     @Autowired
-    private OrderService orderService;
+    private ItemService itemService;
 
-    @PostMapping("/orders")
-    public OrderDto createOrd(@Valid @RequestBody OrderDto orderDto)
+    @PostMapping("/item")
+    public ItemDto createItem(@Valid @RequestBody ItemDto itemDto)
     {
-        OrderDto result=this.orderService.createOrd(orderDto);
+
+        ItemDto result= this.itemService.createItem(itemDto);
         return result;
     }
+
 }
