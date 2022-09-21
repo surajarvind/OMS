@@ -1,14 +1,19 @@
 package com.springboot.OMS_POC.Entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "Address")
 public class Address {
     @Id
