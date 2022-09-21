@@ -7,6 +7,7 @@ import java.util.List;
 public interface CustomerService
 {
     CustomersDto createCust(CustomersDto customersDto);
+    CustomersDto updateCust(CustomersDto customersDto,Integer custId);
 
 
 }

@@ -16,24 +16,23 @@ import java.util.List;
 public class Customers
 {
     @Id
-    @GeneratedValue(strategy =GenerationType.AUTO)
-
      int id;
 
     @Column(nullable = false,length = 100)
      String name;
 
-    @OneToMany
-    List<Address> address=new ArrayList<>();
-
     @Column(unique = true)
-     Long phoneNo;
+     String phoneNo;
 
-    @OneToMany(mappedBy = "customersDetails",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    List<Order> posts=new ArrayList<>();
+//    @OneToMany(mappedBy = "customersDetails",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    List<Order> posts=new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "customersDetailsAddress",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    List<Address> address1=
 
-    @OneToMany(mappedBy = "customersDetailsAddress",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    List<Address> address1=new ArrayList<>();
+    @OneToMany(targetEntity = Address.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "custAdd_fk",referencedColumnName = "id")
+    List<Address> addresses;
 
 
 

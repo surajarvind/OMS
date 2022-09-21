@@ -17,14 +17,13 @@ public class Address
 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
      int id;
      String street;
      String state;
      String country;
      String pinCode;
 
-    @ManyToOne
-    Customers customersDetailsAddress;
+
 
 }

@@ -23,13 +23,16 @@ public class Order
     @Column(name="orderId")
      int id;
      Double price;
-    @ManyToOne
-    Customers customersDetails;
+
+     @OneToOne(targetEntity = Customers.class,cascade = CascadeType.ALL)
+     @JoinColumn(name = "ordCust_fk",referencedColumnName = "id")
+     Customers customersDetails;
      Double discount;
      String orderStatus;
      Date createdDate;
      Time lastModifiedTime;
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    List<Item> orders=new ArrayList<>();
+    @OneToMany(targetEntity = Item.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "ordItem_fk",referencedColumnName = "orderId")
+    List<Item> items;
 
 }

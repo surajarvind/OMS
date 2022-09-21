@@ -1,8 +1,10 @@
 package com.springboot.OMS_POC.Services.ServiceImpl;
 
 import com.springboot.OMS_POC.Entities.Order;
+import com.springboot.OMS_POC.Exceptions.ResourceNotFoundException;
 import com.springboot.OMS_POC.Payloads.CustomersDto;
 import com.springboot.OMS_POC.Payloads.OrderDto;
+import com.springboot.OMS_POC.Repositories.CustomerRepo;
 import com.springboot.OMS_POC.Repositories.OrderRepo;
 import com.springboot.OMS_POC.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class OrderServiceImpl implements OrderService
 {
     @Autowired
     private OrderRepo orderRepo;
+
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -32,7 +36,8 @@ public class OrderServiceImpl implements OrderService
     }
 
     @Override
-    public OrderDto updateOrd(OrderDto orderDto, Integer ordId) {
+    public OrderDto updateOrd(CustomersDto customersDto, Integer ordId) {
+
         return null;
     }
 
@@ -42,8 +47,21 @@ public class OrderServiceImpl implements OrderService
     }
 
     @Override
-    public List<OrderDto> getAllOrd() {
-        return null;
+    public List<Object> getOrdStatus(Integer ordId)
+    {
+
+
+        if(this.orderRepo.existsById(ordId)) {
+
+            List<Object> list = this.orderRepo.findOrderStatus(ordId);
+
+
+            return list;
+        }
+        else
+        {
+            return (List<Object>) new ResourceNotFoundException("Customer","Id",ordId);
+        }
     }
 
 
