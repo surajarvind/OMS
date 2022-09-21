@@ -31,7 +31,7 @@ public class Order
      String orderStatus;
      Date createdDate;
      Time lastModifiedTime;
-    @OneToMany(targetEntity = Item.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Item.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "ordItem_fk",referencedColumnName = "orderId")
     List<Item> items;
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class OrderDto
 {
     @NotNull(message = "id cannot be empty")
@@ -28,7 +30,8 @@ public class OrderDto
      Time lastModifiedTime;
     @OneToOne(targetEntity = Customers.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "ordCust_fk",referencedColumnName = "id")
-    Customers customersDetails;
+    @Valid
+    CustomersDto customersDetails;
     @OneToMany(targetEntity = Item.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "ordItem_fk",referencedColumnName = "id")
     List<Item> items;

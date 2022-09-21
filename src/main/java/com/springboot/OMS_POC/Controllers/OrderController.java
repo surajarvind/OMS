@@ -16,7 +16,7 @@ public class OrderController
     private OrderService orderService;
 
     @PostMapping("/orders")
-    public OrderDto createOrd(@Valid @RequestBody OrderDto orderDto)
+    public OrderDto createOrd( @RequestBody @Valid OrderDto orderDto)
     {
         OrderDto result=this.orderService.createOrd(orderDto);
         return result;
@@ -26,6 +26,13 @@ public class OrderController
     public ResponseEntity<List<Object>> getOrderStatus(@PathVariable Integer ordId)
     {
         return ResponseEntity.ok(this.orderService.getOrdStatus(ordId));
+
+    }
+
+    @PutMapping("/orders/{ordId}")
+    public ResponseEntity<OrderDto> updateUser(@RequestBody @Valid OrderDto orderDto, @PathVariable("ordId") Integer ordId) {
+        OrderDto updatedOrder = this.orderService.updateOrd(orderDto,ordId);
+        return ResponseEntity.ok(updatedOrder);
 
     }
 }

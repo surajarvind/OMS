@@ -10,7 +10,7 @@ public interface OrderService
 {
     OrderDto createOrd(OrderDto orderDto);
 
-    OrderDto updateOrd(CustomersDto customersDto,Integer ordId);
+    OrderDto updateOrd(OrderDto orderDto,Integer ordId);
 
     OrderDto updateCust(CustomersDto customersDto,Integer custId);
 

@@ -36,9 +36,16 @@ public class OrderServiceImpl implements OrderService
     }
 
     @Override
-    public OrderDto updateOrd(CustomersDto customersDto, Integer ordId) {
+    public OrderDto updateOrd(OrderDto orderDto, Integer ordId)
+    {
 
-        return null;
+        Order order=this.orderRepo.findById(ordId).orElseThrow(()-> new ResourceNotFoundException("Order","Id",ordId));
+      Order order1=this.dtoToOrder(orderDto);
+        order.setCustomersDetails(order1.getCustomersDetails());
+        this.orderRepo.save(order);
+
+
+        return this.orderToDto(order);
     }
 
     @Override
