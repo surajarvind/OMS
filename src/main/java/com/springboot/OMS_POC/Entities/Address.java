@@ -2,6 +2,7 @@ package com.springboot.OMS_POC.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.springboot.OMS_POC.Payloads.CustomersDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

@@ -16,12 +16,18 @@ public class OrderController {
 
     @PostMapping("/orders")
     public OrderDto createOrd(@Valid @RequestBody OrderDto orderDto) {
-        OrderDto result=this.orderService.createOrd(orderDto);
+        OrderDto result = this.orderService.createOrd(orderDto);
         return result;
     }
 
     @GetMapping("/orders/{ordId}")
     public ResponseEntity<List<Object>> getOrderStatus(@PathVariable Integer ordId) {
         return ResponseEntity.ok(this.orderService.getOrdStatus(ordId));
+    }
+
+    @PutMapping("/orders/{ordId}")
+    public ResponseEntity<OrderDto> updateUser(@RequestBody @Valid OrderDto orderDto, @PathVariable("ordId") Integer ordId) {
+        OrderDto updatedOrder = this.orderService.updateOrd(orderDto, ordId);
+        return ResponseEntity.ok(updatedOrder);
     }
 }

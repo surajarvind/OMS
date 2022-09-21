@@ -17,7 +17,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepo orderRepo;
     @Autowired
     private ModelMapper modelMapper;
-
     @Override
     public OrderDto createOrd(OrderDto orderDto) {
         Order order=this.dtoToOrder(orderDto);
@@ -26,8 +25,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto updateOrd(CustomersDto customersDto, Integer ordId) {
-        return null;
+    public OrderDto updateOrd(OrderDto orderDto, Integer ordId) {
+        Order order=this.orderRepo.findById(ordId).orElseThrow(()-> new ResourceNotFoundException("Order","Id",ordId));
+        Order order1=this.dtoToOrder(orderDto);
+        order.setCustomersDetails(order1.getCustomersDetails());
+        this.orderRepo.save(order);
+        return this.orderToDto(order);
     }
 
     @Override
@@ -36,8 +39,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Object> getOrdStatus(Integer ordId)
-    {
+    public List<Object> getOrdStatus(Integer ordId) {
         if(this.orderRepo.existsById(ordId)) {
             List<Object> list = this.orderRepo.findOrderStatus(ordId);
             return list;

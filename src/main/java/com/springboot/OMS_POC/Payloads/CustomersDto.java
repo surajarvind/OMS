@@ -1,12 +1,10 @@
 package com.springboot.OMS_POC.Payloads;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.springboot.OMS_POC.Entities.Address;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;

@@ -16,5 +16,6 @@ public class AddressDto {
      String street;
      String state;
      String country;
+     @NonNull
      String pinCode;
 }
