@@ -3,9 +3,7 @@ package com.springboot.OMS_POC.Entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,28 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "Customers")
-public class Customers
-{
+public class Customers {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-     int id;
-
+    int id;
     @Column(nullable = false,length = 100)
-     String name;
-
-    @OneToMany
-    List<Address> address=new ArrayList<>();
-
+    String name;
     @Column(unique = true)
-     Long phoneNo;
-
-    @OneToMany(mappedBy = "customersDetails",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    List<Order> posts=new ArrayList<>();
-
-    @OneToMany(mappedBy = "customersDetailsAddress",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    List<Address> address1=new ArrayList<>();
-
-
-
+    String phoneNo;
+    @OneToMany(targetEntity = Address.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "custAdd_fk",referencedColumnName = "id")
+    List<Address> addresses;
 }

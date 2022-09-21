@@ -7,12 +7,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AddressDto
-{
-
+public class AddressDto {
      int id;
      String street;
      String state;
      String country;
-     int pinCode;
+     String pinCode;
 }
