@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Order Management Services Project",description = "Order Microservices"))
+@OpenAPIDefinition(info = @Info(title = "Order Management Services",description = "Order Microservices"))
 @EnableCaching
 
 public class OmsPocApplication {
