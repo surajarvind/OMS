@@ -16,10 +16,12 @@ public class Item
 {
     @Id
     int itemId;
-    Double price;
+    String  price;
+    @Column(unique = true)
     String fc;
     int qty;
     String itemStatus;
+    @Column(unique = true)
     String sku;
     Date createdDate;
 }

@@ -1,6 +1,7 @@
 package com.springboot.OMS_POC.Entities;
 
 import com.springboot.OMS_POC.Payloads.CustomersDto;
+import com.springboot.OMS_POC.utils.OrderStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,11 +25,12 @@ public class Order
      int id;
      Double price;
 
-     @OneToOne(targetEntity = Customers.class,cascade = CascadeType.ALL)
+     @OneToOne(targetEntity = Customers.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
      @JoinColumn(name = "ordCust_fk",referencedColumnName = "id")
      Customers customersDetails;
      Double discount;
-     String orderStatus;
+     @Enumerated(EnumType.STRING)
+     OrderStatus orderStatus;
      Date createdDate;
      Time lastModifiedTime;
     @OneToMany(targetEntity = Item.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)

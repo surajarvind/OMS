@@ -10,8 +10,7 @@ import java.util.List;
 public interface OrderRepo extends JpaRepository<Order,Integer>
 {
     @Query(value = "select o.order_status from orders o where o.order_id=:a",nativeQuery = true)
-  public List<Object> findOrderStatus(@Param("a") int ordId);
+  public Object findOrderStatus(@Param("a") int ordId);
 
-//    @Query(value = "select b.title from books b where b.author=:a",nativeQuery = true)
-//    public List<Object> getBook1byAuthor(@Param("a") String author);
+
 }

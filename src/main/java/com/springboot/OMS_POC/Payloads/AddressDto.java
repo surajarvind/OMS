@@ -1,12 +1,12 @@
 package com.springboot.OMS_POC.Payloads;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 public class AddressDto
 {
 

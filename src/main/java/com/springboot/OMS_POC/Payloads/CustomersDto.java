@@ -2,9 +2,7 @@ package com.springboot.OMS_POC.Payloads;
 
 
 import com.springboot.OMS_POC.Entities.Address;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
@@ -17,6 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 public class CustomersDto
 {
      int id;

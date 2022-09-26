@@ -12,7 +12,7 @@ import java.util.Date;
 public class ItemDto
 {
     int itemId;
-    Double price;
+    String price;
     String fc;
     @NotEmpty
     int qty;

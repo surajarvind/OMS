@@ -23,6 +23,15 @@ public class GlobalExceptionHandler
 
     }
 
+//    @ExceptionHandler(StatusLevelNotMatchException.class)
+//    public ResponseEntity<ApiResponse> statusLevelNotMatchHandler(StatusLevelNotMatchException ex)
+//    {
+//        String message = ex.getMessage();
+//        ApiResponse apiResponse = new ApiResponse(message, false);
+//        return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.NOT_FOUND);
+//
+//    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgsNotValidException(MethodArgumentNotValidException ex) {
         Map<String, String> resp = new HashMap<>();

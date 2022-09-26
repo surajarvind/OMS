@@ -30,7 +30,7 @@ public class Customers
 //    @OneToMany(mappedBy = "customersDetailsAddress",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 //    List<Address> address1=
 
-    @OneToMany(targetEntity = Address.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Address.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "custAdd_fk",referencedColumnName = "id")
     List<Address> addresses;
 
