@@ -1,7 +1,6 @@
 package com.springboot.OMS_POC.Services.ServiceImpl;
 
 import com.springboot.OMS_POC.Common.GenericResponse;
-import com.springboot.OMS_POC.DefaultSerialiser.CustomResponseEntity;
 import com.springboot.OMS_POC.Entities.Order;
 import com.springboot.OMS_POC.Exceptions.ResourceNotFoundException;
 import com.springboot.OMS_POC.Payloads.OrderDto;
@@ -40,7 +39,7 @@ public class OrderServiceImpl implements OrderService
     }
 
    // @CachePut(cacheNames = "orders",key = "#ord.id")
-   // @CachePut(cacheNames = "object",key = "#orderId")
+   // @CachePut(cacheNames = "orders",key = "#orderId")
     @Override
     public ResponseEntity<GenericResponse> updateCustomer(OrderDto orderDto, Integer orderId)
     {
@@ -58,7 +57,7 @@ public class OrderServiceImpl implements OrderService
 
 
    // @CachePut(cacheNames = "orders",key = "#ord.id")
-    //@CachePut(cacheNames = "object",key = "#orderId")
+    //@CachePut(cacheNames = "orders",key = "#orderId")
     @Override
     public ResponseEntity<GenericResponse> updateOrderStatus(OrderDto orderDto,Integer orderId)
     {
@@ -84,7 +83,7 @@ public class OrderServiceImpl implements OrderService
 
     }
 
-    //@Cacheable(cacheNames = "object",key = "#orderId")
+    //@Cacheable(cacheNames = "orders",key = "#orderId")
     @Override
     public ResponseEntity<GenericResponse> getOrderStatus(Integer orderId)
     {
