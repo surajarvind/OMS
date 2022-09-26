@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping(value = "/api")
 public class OrderController {
     @Autowired
     private OrderService orderService;
