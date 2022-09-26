@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,7 +22,14 @@ public class Customers {
     String name;
     @Column(unique = true)
     String phoneNo;
-    @OneToMany(targetEntity = Address.class,cascade = CascadeType.ALL)
+
+//    @OneToMany(mappedBy = "customersDetails",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    List<Order> posts=new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "customersDetailsAddress",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    List<Address> address1=
+
+    @OneToMany(targetEntity = Address.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "custAdd_fk",referencedColumnName = "id")
     List<Address> addresses;
 }

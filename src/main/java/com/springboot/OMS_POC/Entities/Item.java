@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,11 +18,12 @@ import java.util.Date;
 public class Item {
     @Id
     int itemId;
-    Double price;
+    String  price;
+    @Column(unique = true)
     String fc;
     int qty;
     String itemStatus;
+    @Column(unique = true)
     String sku;
     Date createdDate;
 }
-

@@ -12,6 +12,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponse {
-     String message;
-     boolean success;
+     private String message;
+     private boolean success;
 }

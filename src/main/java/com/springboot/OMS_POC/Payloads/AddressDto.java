@@ -11,11 +11,11 @@ import lombok.experimental.FieldDefaults;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
 public class AddressDto {
      int id;
      String street;
      String state;
      String country;
-     @NonNull
      String pinCode;
 }

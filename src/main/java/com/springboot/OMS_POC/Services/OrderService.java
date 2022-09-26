@@ -1,12 +1,12 @@
 package com.springboot.OMS_POC.Services;
 
-import com.springboot.OMS_POC.Payloads.CustomersDto;
+import com.springboot.OMS_POC.Common.GenericResponse;
 import com.springboot.OMS_POC.Payloads.OrderDto;
-import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 public interface OrderService {
-    OrderDto createOrd(OrderDto orderDto);
-    OrderDto updateOrd(OrderDto orderDto,Integer ordId);
-    OrderDto updateCust(CustomersDto customersDto,Integer custId);
-    List<Object> getOrdStatus(Integer ordId);
+    ResponseEntity<GenericResponse> createOrder(OrderDto orderDto);
+    ResponseEntity<GenericResponse> updateCustomer(OrderDto orderDto,Integer orderId);
+    ResponseEntity<GenericResponse> updateOrderStatus(OrderDto orderDto,Integer orderId);
+    ResponseEntity<GenericResponse> getOrderStatus(Integer orderId);
 }

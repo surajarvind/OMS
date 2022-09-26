@@ -12,12 +12,21 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(com.springboot.OMS_POC.Exception.ResourceNotFoundException.class)
-    public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(com.springboot.OMS_POC.Exception.ResourceNotFoundException ex) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex) {
         String message = ex.getMessage();
         ApiResponse apiResponse = new ApiResponse(message, false);
         return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.NOT_FOUND);
     }
+
+//    @ExceptionHandler(StatusLevelNotMatchException.class)
+//    public ResponseEntity<ApiResponse> statusLevelNotMatchHandler(StatusLevelNotMatchException ex)
+//    {
+//        String message = ex.getMessage();
+//        ApiResponse apiResponse = new ApiResponse(message, false);
+//        return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.NOT_FOUND);
+//
+//    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgsNotValidException(MethodArgumentNotValidException ex) {

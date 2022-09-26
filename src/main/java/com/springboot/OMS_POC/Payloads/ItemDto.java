@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
@@ -16,7 +15,7 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ItemDto {
     int itemId;
-    Double price;
+    String price;
     String fc;
     @NotEmpty
     int qty;
