@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 
+
 @RestController
+@RequestMapping("/orders")
 public class OrderController
 {
     @Autowired
@@ -18,40 +20,37 @@ public class OrderController
     private OrderService orderService;
 
     //posting
-    @PostMapping("/orders")
-    public ResponseEntity<GenericResponse> createOrder( @RequestBody @Valid OrderDto orderDto)
+    @PostMapping("/")
+    public ResponseEntity<GenericResponse<OrderDto>> createOrder( @RequestBody @Valid OrderDto orderDto)
     {
-       return  this.orderService.createOrder(orderDto);
+       return  orderService.createOrder(orderDto);
 
     }
 
 
     //GetOrderStatus
-    @GetMapping("/orders/status/{orderId}")
-    public ResponseEntity<GenericResponse> getOrderStatus(@PathVariable Integer orderId)
+    @GetMapping("/status/{orderId}")
+    public ResponseEntity<GenericResponse<String>> getOrderStatus(@PathVariable Integer orderId)
     {
-        return this.orderService.getOrderStatus(orderId);
+        return orderService.getOrderStatus(orderId);
 
     }
 
 
     //UpdateCustomerDetails
-    @PutMapping("/orders/customer/details/{orderId}")
-    public ResponseEntity<GenericResponse> updateCustomer(@RequestBody @Valid OrderDto orderDto, @PathVariable("orderId") Integer orderId) {
-        return this.orderService.updateCustomer(orderDto,orderId);
+    @PutMapping("/customer/details/{orderId}")
+    public ResponseEntity<GenericResponse<String>> updateCustomer(@RequestBody @Valid OrderDto orderDto, @PathVariable("orderId") Integer orderId) {
+        return orderService.updateCustomer(orderDto,orderId);
 
 
     }
 
     //UpdateOrderStatus
-    @PutMapping("/order/status/{orderId}")
-    public ResponseEntity<GenericResponse> updateOrderStatus(@RequestBody OrderDto orderDto,@PathVariable("orderId") Integer orderId)
+    @PutMapping("/status/{orderId}")
+    public ResponseEntity<GenericResponse<String>> updateOrderStatus(@RequestBody OrderDto orderDto,@PathVariable("orderId") Integer orderId)
     {
 
-
-          return this.orderService.updateOrderStatus(orderDto,orderId);
-
-
+          return orderService.updateOrderStatus(orderDto,orderId);
 
     }
 

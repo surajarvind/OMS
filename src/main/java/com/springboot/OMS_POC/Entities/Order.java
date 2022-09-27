@@ -31,7 +31,7 @@ public class Order
      Double discount;
      @Enumerated(EnumType.STRING)
      OrderStatus orderStatus;
-     Date createdDate;
+     Date createdDate;       //uto create date and time
      Time lastModifiedTime;
     @OneToMany(targetEntity = Item.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "ordItem_fk",referencedColumnName = "orderId")

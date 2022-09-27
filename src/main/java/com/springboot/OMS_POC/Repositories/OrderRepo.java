@@ -10,7 +10,7 @@ import java.util.List;
 public interface OrderRepo extends JpaRepository<Order,Integer>
 {
     @Query(value = "select o.order_status from orders o where o.order_id=:a",nativeQuery = true)
-  public Object findOrderStatus(@Param("a") int ordId);
+    Object findOrderStatus(@Param("a") int ordId);
 
 
 }

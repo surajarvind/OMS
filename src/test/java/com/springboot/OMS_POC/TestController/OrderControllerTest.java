@@ -1,38 +1,37 @@
 package com.springboot.OMS_POC.TestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.OMS_POC.Controllers.OrderController;
 import com.springboot.OMS_POC.Entities.Address;
 import com.springboot.OMS_POC.Payloads.AddressDto;
 import com.springboot.OMS_POC.Payloads.CustomersDto;
 import com.springboot.OMS_POC.Payloads.OrderDto;
 import com.springboot.OMS_POC.Services.OrderService;
 import com.springboot.OMS_POC.utils.OrderStatus;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 
-
 import java.util.List;
-import java.util.Optional;
-
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.modelmapper.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
-
-@WebMvcTest
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(controllers = OrderController.class)
 public class OrderControllerTest
 {
     @Autowired
@@ -44,6 +43,7 @@ public class OrderControllerTest
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Test
     public void createOrder() throws Exception
     {
         OrderDto orderDto=OrderDto.builder().id(1)
@@ -77,6 +77,7 @@ public class OrderControllerTest
                         is(orderDto.getOrderStatus())));
 
     }
+    @Test
 
     public void getOrderStatus() throws Exception
     {

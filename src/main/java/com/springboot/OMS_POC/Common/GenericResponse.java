@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class GenericResponse
+public class GenericResponse<T>
 {
-    Object data;
+    T data;
     Integer status;
 
     public GenericResponse()

@@ -2,7 +2,7 @@ package com.springboot.OMS_POC.utils;
 
 public enum OrderStatus
 {
-    //if new status added just check
+
 
     INITIATED(1),
     ASSIGNED(2),

@@ -6,13 +6,11 @@ import com.springboot.OMS_POC.Exceptions.ResourceNotFoundException;
 import com.springboot.OMS_POC.Payloads.OrderDto;
 import com.springboot.OMS_POC.Repositories.OrderRepo;
 import com.springboot.OMS_POC.Services.OrderService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 
 
 
@@ -25,29 +23,30 @@ public class OrderServiceImpl implements OrderService
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<GenericResponse> createOrder(OrderDto orderDto)
+    public ResponseEntity<GenericResponse<OrderDto>> createOrder(OrderDto orderDto)
     {
         GenericResponse genericResponse=new GenericResponse();
 
-        Order order=this.dtoToOrder(orderDto);
-        Order savedOrder=this.orderRepo.save(order);
-        genericResponse.setData( this.orderToDto(savedOrder));
+        Order order=dtoToOrder(orderDto);
+        Order savedOrder=orderRepo.save(order);
+        genericResponse.setData( orderToDto(savedOrder));
 
         return ResponseEntity.ok(genericResponse);
 
     }
 
+    //response entity in controller itself
    // @CachePut(cacheNames = "orders",key = "#ord.id")
    // @CachePut(cacheNames = "orders",key = "#orderId")
     @Override
-    public ResponseEntity<GenericResponse> updateCustomer(OrderDto orderDto, Integer orderId)
+    public ResponseEntity<GenericResponse<String>> updateCustomer(OrderDto orderDto, Integer orderId)
     {
         GenericResponse genericResponse=new GenericResponse();
 
-        Order order=this.orderRepo.findById(orderId).orElseThrow(()-> new ResourceNotFoundException("Order","Id",orderId));
-      Order order1=this.dtoToOrder(orderDto);
+        Order order=orderRepo.findById(orderId).orElseThrow(()-> new ResourceNotFoundException("Order","Id",orderId));
+      Order order1=dtoToOrder(orderDto);
         order.setCustomersDetails(order1.getCustomersDetails());
-        this.orderRepo.save(order);
+        orderRepo.save(order);
 
         genericResponse.setData("Updated successfully");
 
@@ -58,17 +57,17 @@ public class OrderServiceImpl implements OrderService
    // @CachePut(cacheNames = "orders",key = "#ord.id")
     //@CachePut(cacheNames = "orders",key = "#orderId")
     @Override
-    public ResponseEntity<GenericResponse> updateOrderStatus(OrderDto orderDto,Integer orderId)
+    public ResponseEntity<GenericResponse<String>> updateOrderStatus(OrderDto orderDto,Integer orderId)
     {
         GenericResponse genericResponse=new GenericResponse();
 
-        Order order =this.orderRepo.findById(orderId).orElseThrow(()->new ResourceNotFoundException("Order","Id",orderId));
-        Order order1=this.dtoToOrder(orderDto);
+        Order order =orderRepo.findById(orderId).orElseThrow(()->new ResourceNotFoundException("Order","Id",orderId));
+        Order order1=dtoToOrder(orderDto);
 
         if(order1.getOrderStatus().ordinal()>order.getOrderStatus().ordinal() && (order.getOrderStatus().ordinal()<5))
         {
             order.setOrderStatus(order1.getOrderStatus());
-            this.orderRepo.save(order);
+            orderRepo.save(order);
             genericResponse.setData("UPDATED SUCCESSFULLY");
             return ResponseEntity.ok(genericResponse);
         }
@@ -84,14 +83,14 @@ public class OrderServiceImpl implements OrderService
 
     //@Cacheable(cacheNames = "orders",key = "#orderId")
     @Override
-    public ResponseEntity<GenericResponse> getOrderStatus(Integer orderId)
+    public ResponseEntity<GenericResponse<String>> getOrderStatus(Integer orderId)
     {
         GenericResponse genericResponse=new GenericResponse();
 
-        if(this.orderRepo.existsById(orderId)) {
+        if(orderRepo.existsById(orderId)) {
 
 
-            Object result = this.orderRepo.findOrderStatus(orderId);
+            Object result = orderRepo.findOrderStatus(orderId);
             genericResponse.setData(result);
 
 
@@ -110,13 +109,13 @@ public class OrderServiceImpl implements OrderService
 
     public Order dtoToOrder(OrderDto orderDto)
     {
-        Order order= this.modelMapper.map(orderDto,Order.class);
+        Order order= modelMapper.map(orderDto,Order.class);
         return  order;
     }
 
     public OrderDto orderToDto(Order order)
     {
-        OrderDto orderDto=this.modelMapper.map(order,OrderDto.class);
+        OrderDto orderDto=modelMapper.map(order,OrderDto.class);
         return orderDto;
     }
 }
