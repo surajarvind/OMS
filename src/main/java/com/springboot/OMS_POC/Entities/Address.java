@@ -1,11 +1,12 @@
 package com.springboot.OMS_POC.Entities;
 
-import com.springboot.OMS_POC.Payloads.CustomersDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @NoArgsConstructor
@@ -13,17 +14,14 @@ import javax.persistence.*;
 @Setter
 @Table(name = "Address")
 
-public class Address
-
-{
+public class Address {
     @Id
 
-     int id;
-     String street;
-     String state;
-     String country;
-     String pinCode;
-
+    int id;
+    String street;
+    String state;
+    String country;
+    String pinCode;
 
 
 }

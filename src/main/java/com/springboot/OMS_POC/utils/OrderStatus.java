@@ -1,7 +1,6 @@
 package com.springboot.OMS_POC.utils;
 
-public enum OrderStatus
-{
+public enum OrderStatus {
 
 
     INITIATED(1),
@@ -14,9 +13,8 @@ public enum OrderStatus
 
     int levelOfStatus;
 
-    OrderStatus(int levelOfStatus)
-    {
-        this.levelOfStatus=levelOfStatus;
+    OrderStatus(int levelOfStatus) {
+        this.levelOfStatus = levelOfStatus;
     }
 
 

@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -12,11 +15,10 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "Item")
-public class Item
-{
+public class Item {
     @Id
     int itemId;
-    String  price;
+    String price;
     @Column(unique = true)
     String fc;
     int qty;

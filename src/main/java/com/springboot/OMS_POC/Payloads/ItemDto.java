@@ -3,14 +3,14 @@ package com.springboot.OMS_POC.Payloads;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @NoArgsConstructor
 @Getter
 @Setter
-public class ItemDto
-{
+public class ItemDto {
     int itemId;
     String price;
     String fc;

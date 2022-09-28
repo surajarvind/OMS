@@ -1,18 +1,21 @@
 package com.springboot.OMS_POC.Payloads;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
-public class AddressDto
-{
+public class AddressDto {
 
-     int id;
-     String street;
-     String state;
-     String country;
-     String pinCode;
+    int id;
+    String street;
+    String state;
+    String country;
+    String pinCode;
 }

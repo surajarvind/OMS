@@ -12,82 +12,72 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import static com.springboot.OMS_POC.Constants.ConstantsValue.Id_Value;
+import static com.springboot.OMS_POC.Constants.ConstantsValue.Not_Updated_Value;
+import static com.springboot.OMS_POC.Constants.ConstantsValue.Order_Value;
+import static com.springboot.OMS_POC.Constants.ConstantsValue.Updated_Value;
 
 
 @Service
-public class OrderServiceImpl implements OrderService
-{
+public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepo orderRepo;
     @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<GenericResponse<OrderDto>> createOrder(OrderDto orderDto)
-    {
-        GenericResponse genericResponse=new GenericResponse();
+    public ResponseEntity<GenericResponse<OrderDto>> createOrder(OrderDto orderDto) {
+        GenericResponse genericResponse = new GenericResponse();
 
-        Order order=dtoToOrder(orderDto);
-        Order savedOrder=orderRepo.save(order);
-        genericResponse.setData( orderToDto(savedOrder));
+        Order order = dtoToOrder(orderDto);
+        Order savedOrder = orderRepo.save(order);
+        genericResponse.setData(orderToDto(savedOrder));
 
         return ResponseEntity.ok(genericResponse);
 
     }
 
-    //response entity in controller itself
-   // @CachePut(cacheNames = "orders",key = "#ord.id")
-   // @CachePut(cacheNames = "orders",key = "#orderId")
     @Override
-    public ResponseEntity<GenericResponse<String>> updateCustomer(OrderDto orderDto, Integer orderId)
-    {
-        GenericResponse genericResponse=new GenericResponse();
+    public ResponseEntity<GenericResponse<String>> updateCustomer(OrderDto orderDto, Integer orderId) {
+        GenericResponse genericResponse = new GenericResponse();
 
-        Order order=orderRepo.findById(orderId).orElseThrow(()-> new ResourceNotFoundException("Order","Id",orderId));
-      Order order1=dtoToOrder(orderDto);
+        Order order = orderRepo.findById(orderId).orElseThrow(() -> new ResourceNotFoundException(Order_Value, Id_Value, orderId));
+        Order order1 = dtoToOrder(orderDto);
         order.setCustomersDetails(order1.getCustomersDetails());
         orderRepo.save(order);
 
-        genericResponse.setData("Updated successfully");
+        genericResponse.setData(Updated_Value);
 
         return ResponseEntity.ok(genericResponse);
     }
 
 
-   // @CachePut(cacheNames = "orders",key = "#ord.id")
-    //@CachePut(cacheNames = "orders",key = "#orderId")
     @Override
-    public ResponseEntity<GenericResponse<String>> updateOrderStatus(OrderDto orderDto,Integer orderId)
-    {
-        GenericResponse genericResponse=new GenericResponse();
+    public ResponseEntity<GenericResponse<String>> updateOrderStatus(OrderDto orderDto, Integer orderId) {
+        GenericResponse genericResponse = new GenericResponse();
 
-        Order order =orderRepo.findById(orderId).orElseThrow(()->new ResourceNotFoundException("Order","Id",orderId));
-        Order order1=dtoToOrder(orderDto);
+        Order order = orderRepo.findById(orderId).orElseThrow(() -> new ResourceNotFoundException(Order_Value, Id_Value, orderId));
+        Order obtainedOrder = dtoToOrder(orderDto);
 
-        if(order1.getOrderStatus().ordinal()>order.getOrderStatus().ordinal() && (order.getOrderStatus().ordinal()<5))
-        {
-            order.setOrderStatus(order1.getOrderStatus());
+        if (obtainedOrder.getOrderStatus().ordinal() > order.getOrderStatus().ordinal() && (order.getOrderStatus().ordinal() < 5)) {
+            order.setOrderStatus(obtainedOrder.getOrderStatus());
             orderRepo.save(order);
-            genericResponse.setData("UPDATED SUCCESSFULLY");
+            genericResponse.setData(Updated_Value);
             return ResponseEntity.ok(genericResponse);
-        }
-        else {
-            genericResponse.setData("NOT UPDATED , DOES NOT MATCH FLOW");
+        } else {
+            genericResponse.setData(Not_Updated_Value);
             genericResponse.setStatus(HttpStatus.BAD_REQUEST.value());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(genericResponse) ;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(genericResponse);
         }
-
 
 
     }
 
-    //@Cacheable(cacheNames = "orders",key = "#orderId")
     @Override
-    public ResponseEntity<GenericResponse<String>> getOrderStatus(Integer orderId)
-    {
-        GenericResponse genericResponse=new GenericResponse();
+    public ResponseEntity<GenericResponse<String>> getOrderStatus(Integer orderId) {
+        GenericResponse genericResponse = new GenericResponse();
 
-        if(orderRepo.existsById(orderId)) {
+        if (orderRepo.existsById(orderId)) {
 
 
             Object result = orderRepo.findOrderStatus(orderId);
@@ -95,27 +85,21 @@ public class OrderServiceImpl implements OrderService
 
 
             return ResponseEntity.ok(genericResponse);
-        }
-        else
-        {
-            genericResponse.setData( new ResourceNotFoundException("ORDER","Id",orderId).getMessage());
+        } else {
+            genericResponse.setData(new ResourceNotFoundException(Order_Value, Id_Value, orderId).getMessage());
             genericResponse.setStatus(HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(genericResponse);
         }
     }
 
 
-
-
-    public Order dtoToOrder(OrderDto orderDto)
-    {
-        Order order= modelMapper.map(orderDto,Order.class);
-        return  order;
+    public Order dtoToOrder(OrderDto orderDto) {
+        Order order = modelMapper.map(orderDto, Order.class);
+        return order;
     }
 
-    public OrderDto orderToDto(Order order)
-    {
-        OrderDto orderDto=modelMapper.map(order,OrderDto.class);
+    public OrderDto orderToDto(Order order) {
+        OrderDto orderDto = modelMapper.map(order, OrderDto.class);
         return orderDto;
     }
 }
